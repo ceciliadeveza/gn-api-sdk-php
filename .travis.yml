@@ -3,3 +3,4 @@ php:
 - "5.3.0"
 notifications:
  email: false
+script: phpunit -c tests/config.xml tests

@@ -1,6 +1,15 @@
 <?php
 
-use Gerencianet;
+use Gerencianet\Gerencianet;
+use Gerencianet\Helpers\AddressGerencianet;
+use Gerencianet\Helpers\CustomerGerencianet;
+use Gerencianet\Helpers\ItemGerencianet;
+use Gerencianet\Helpers\MarketplaceGerencianet;
+use Gerencianet\Helpers\MetadataGerencianet;
+use Gerencianet\Helpers\RepassGerencianet;
+use Gerencianet\Helpers\ShippingGerencianet;
+use Gerencianet\Helpers\SubscriptionGerencianet;
+use Gerencianet\Webservices\ApiBaseGerencianet;
 use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Message\Response;
 

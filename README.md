@@ -6,7 +6,7 @@ For more informations about parameters and values, please refer to [Gerencianet]
 
 ## Installation ##
 ```
-$ command
+$ php composer.phar require gerencianet/gerencianet-sdk-php
 ```
 
 ## Get start ##
@@ -296,5 +296,5 @@ $response = $apiGN->getTotalBol()
 
 To run tests install [PHPUnit](https://phpunit.de/getting-started.html) and run the following command:
 ```php
-phpunit -c tests/config.xml tests
+$ phpunit -c tests/config.xml tests
 ```

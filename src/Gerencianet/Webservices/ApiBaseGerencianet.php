@@ -32,12 +32,12 @@ abstract class ApiBaseGerencianet {
   /**
    * Define API Gerencianet url
    */
-  const BASE_URL = 'http://talitagnapi.gerencianet.com.br:4400';
+  const BASE_URL = 'https://api.gerencianet.com.br';
 
   /**
    * Define Gerencianet test url
    */
-  const BASE_TEST_URL = 'http://talitagnapi.gerencianet.com.br:4400';
+  const BASE_TEST_URL = 'https://sandbox.gerencianet.com.br';
 
   /**
    * Define url to get access token

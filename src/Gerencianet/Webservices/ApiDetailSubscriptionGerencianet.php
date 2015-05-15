@@ -1,4 +1,7 @@
 <?php
+
+namespace Gerencianet\Webservices;
+
 /**
  * Library to use Gerencianet's Api
  *
@@ -6,26 +9,27 @@
  * @author Talita Campos <suportetecnico@gerencianet.com.br>
  * @author Francisco Thiene <suportetecnico@gerencianet.com.br>
  * @author Cecilia Deveza <suportetecnico@gerencianet.com.br>
+ * @author Thomaz Feitoza <suportetecnico@gerencianet.com.br>
  *
- * @version 1.0.0
+ * @version 0.1.0
  * @license http://opensource.org/licenses/MIT
  */
 
 /**
- * Gerencianet's notification class
+ * Gerencianet's detail subscription class
  *
- * Implements how to use Gerencianet's notification
+ * Implements how to use Gerencianet's detail subscription
  *
  * @package Gerencianet
  */
-class ApiNotificationGerencianet extends ApiBaseGerencianet {
+class ApiDetailSubscriptionGerencianet extends ApiBaseGerencianet {
 
   /**
-   * Transaction's notification token
+   * Subscription id to detail
    *
-   * @var string
+   * @var integer
    */
-  private $_notificationToken;
+  private $_subscriptionId;
 
   /**
    * Construct method
@@ -36,38 +40,37 @@ class ApiNotificationGerencianet extends ApiBaseGerencianet {
    */
   public function __construct($clientId, $clientSecret, $isTest) {
     parent::__construct($clientId, $clientSecret, $isTest);
-    $this->setUrl('/notification');
+    $this->setUrl('/subscription/detail');
   }
 
   /**
-   * Set the notification token
+   * Set subscription id
    *
-   * @param  string $notificationToken
-   * @return ApiNotificationGerencianet
+   * @param  integer $id
+   * @return ApiDetailSubscriptionGerencianet
    */
-  public function notificationToken($notificationToken) {
-    $this->_notificationToken = $notificationToken;
+  public function subscriptionId($id) {
+    $this->_subscriptionId = $id;
     return $this;
   }
 
   /**
-   * Get the notification token
+   * Get subscription id
    *
-   * @return ApiNotificationGerencianet
+   * @return integer
    */
-  public function getNotificationToken() {
-    return $this->_notificationToken;
+  public function getSubscriptionId() {
+    return $this->_subscriptionId;
   }
-
 
   /**
    * Map parameters into data object
    *
    * @see ApiBaseGerencianet::mapData()
-   * @return ApiNotificationGerencianet
+   * @return ApiDetailSubscriptionGerencianet
    */
   public function mapData() {
-    $this->_data['notification'] = $this->_notificationToken;
+    $this->_data['subscription_id'] = $this->_subscriptionId;
 
     return $this;
   }

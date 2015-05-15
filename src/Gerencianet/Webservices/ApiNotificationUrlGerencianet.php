@@ -1,4 +1,7 @@
 <?php
+
+namespace Gerencianet\Webservices;
+
 /**
  * Library to use Gerencianet's Api
  *
@@ -6,10 +9,12 @@
  * @author Talita Campos <suportetecnico@gerencianet.com.br>
  * @author Francisco Thiene <suportetecnico@gerencianet.com.br>
  * @author Cecilia Deveza <suportetecnico@gerencianet.com.br>
+ * @author Thomaz Feitoza <suportetecnico@gerencianet.com.br>
  *
- * @version 1.0.0
+ * @version 0.1.0
  * @license http://opensource.org/licenses/MIT
  */
+
 
 /**
  * Gerencianet's notification url class

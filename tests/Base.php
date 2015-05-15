@@ -1,5 +1,6 @@
 <?php
 
+use Gerencianet;
 use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Message\Response;
 

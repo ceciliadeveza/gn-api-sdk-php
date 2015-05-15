@@ -1,0 +1,10 @@
+{
+  "code": 200,
+  "response": {
+    "transaction": 10000,
+    "total": 1381,
+    "payment": "credit_card",
+    "parcels": 1,
+    "parcel_value": 1381
+  }
+}

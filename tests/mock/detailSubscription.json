@@ -1,0 +1,22 @@
+{
+  "code": 200,
+  "subscription": {
+    "id": 3,
+    "value": 10000,
+    "status": "done",
+    "payment_method": "credit_card",
+    "interval": 1,
+    "repeats": 2,
+    "processed_amount": 2,
+    "created_at": "2015-04-09 11:32:03",
+    "history": [ {
+      "charge_id": 6,
+      "status": "waiting approval",
+      "created_at": "2015-04-09 11:32:03"
+    }, {
+      "charge_id": 7,
+      "status": "paid",
+      "created_at": "2015-04-09 11:36:22"
+    } ]
+  }
+}

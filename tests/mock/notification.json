@@ -1,0 +1,20 @@
+{
+  "code": 200,
+  "charge": {
+    "id": 332,
+    "total": 10000,
+    "status": "waiting approval",
+    "custom_id": null,
+    "created_at": "2015-03-23",
+    "history": [
+      {
+        "status": "new",
+        "timestamp": "2015-03-23 14:31:44"
+      },
+      {
+        "status": "waiting approval",
+        "timestamp": "2015-03-23 14:36:58"
+      }
+    ]
+  }
+}

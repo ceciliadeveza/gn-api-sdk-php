@@ -1,0 +1,49 @@
+{
+  "code": 200,
+  "charge": {
+    "id": 6,
+    "subscription_id": 3,
+    "total": 10000,
+    "status": "waiting approval",
+    "custom_id": null,
+    "created_at": "2015-04-09",
+    "notification_url": "http://localhost/teste.php",
+    "items": [ {
+      "name": "item 1",
+      "value": 10000,
+      "amount": 1
+    } ],
+    "history": [ {
+      "status": "new",
+      "created_at": "2015-04-09 11:32:03"
+    }, {
+      "status": "waiting approval",
+      "created_at": "2015-04-09 11:32:11"
+    } ],
+    "customer": {
+      "name": "Gerencianet Pagamentos do Brasil",
+      "email": "suporte@gerencianet.com.br",
+      "document": "26245144000100",
+      "birth": "1995-05-02",
+      "phone_number": "3136030800"
+    },
+    "payment": {
+      "method": "credit_card",
+      "created_at": "2015-04-09",
+      "credit_card": {
+        "mask": "XXXXXXXXXXXX3335",
+        "installments": 1,
+        "installment_value": 0,
+        "address": {
+          "street": "Av. JK",
+          "number": "909",
+          "complement": null,
+          "neighborhood": "Bauxita",
+          "city": "Ouro Preto",
+          "state": "MG",
+          "zipcode": "35400000"
+        }
+      }
+    }
+  }
+}

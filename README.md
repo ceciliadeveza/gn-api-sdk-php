@@ -4,6 +4,10 @@ For more informations about parameters and values, please refer to [Gerencianet]
 
 **:warning: This module is under development and is based on the new API that Gerencianet is about to release. It won't work in production by now.**
 
+
+[![Build Status](https://travis-ci.org/talitacampos/gn-api-sdk-php.svg?branch=master)](https://travis-ci.org/talitacampos/gn-api-sdk-php)
+
+
 ## Installation ##
 ```
 $ php composer.phar require gerencianet/gerencianet-sdk-php

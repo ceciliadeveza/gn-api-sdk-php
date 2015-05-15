@@ -4,3 +4,5 @@ php:
 notifications:
  email: false
 script: phpunit -c tests/config.xml tests
+install:
+- composer install

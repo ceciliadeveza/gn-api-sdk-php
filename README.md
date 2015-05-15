@@ -1,5 +1,6 @@
 # SDK GERENCIANET FOR PHP #
 Sdk for Gerencianet Pagamentos' API.
+For more informations about parameters and values, please refer to [Gerencianet](www.gerencianet.com.br) documentation.
 
 **:warning: This module is under development and is based on the new API that Gerencianet is about to release. It won't work in production by now.**
 
@@ -8,7 +9,7 @@ Sdk for Gerencianet Pagamentos' API.
 $ command
 ```
 
-## Usage ##
+## Get start ##
 Require the module:
 ```php
 require_once __DIR__ . '/your_directory/autoload.php';
@@ -33,7 +34,7 @@ $apiSecret = 'your_client_secret';
 $apiGN = new Gerencianet($apiKey, $apiSecret, true);
 ```
 
-### Creating charge ###
+## Creating charge ##
 
 To create a new charge, you must create at least one item:
 ```php
@@ -104,6 +105,16 @@ $response = $apiGN->createCharge()
                   ->response();
 ```
 
+### Detailing charge ###
+
+To detail a charge, you can use:
+```php
+$response = $apiGN->detailCharge()
+                  ->chargeId($chargeId)
+                  ->run()
+                  ->response();
+```
+
 ### Associating a customer to a charge ###
 
 You have two options to add a customer:
@@ -143,7 +154,7 @@ $response = $apiGN->createCustomer()
                   ->response();
 ```
 
-### Paying charge ###
+## Creating payment ##
 
 To pay the charge you must use the createPayment function, but you must define if the payment method is **bol** or **credit card**.
 
@@ -170,7 +181,7 @@ $response = $apiGN->createPayment()
                   ->response();
 ```
 
-### Marketplace ###
+## Marketplace ##
 
 If you want use marketplace, use as follow:
 
@@ -198,18 +209,81 @@ $shipping->payeeCode('payee_code_to_repass')
          ->value(2000);
 ```
 
-### Detailing charge ###
-To detail a charge, you can use:
+
+## Notification ##
+
+Notifications for a charge will be received at the notification URL sent in metadata. To detail this notification you must send the token received in your POST variable as listed below:
 ```php
-$response = $apiGN->detailCharge()
+$notificationToken = $_POST['notification'];
+$response = $apiGN->getNotifications()
+                  ->notificationToken($notificationToken)
+                  ->run()
+                  ->response();
+```
+
+If you want to change the notification URL of a charge, do as follow:
+```php
+$response = $apiGN->updateNotificationUrl()
+                  ->notificationUrl('http://your_domain/your_new_notification_url')
                   ->chargeId($chargeId)
                   ->run()
                   ->response();
 ```
 
-## Running tests ##
-To run tests using php unit run the following command:
+## Subscriptions ##
 
+To create a charge as a subscription, you need add to charge creation the following code:
+```php
+$subscription = new SubscriptionGerencianet();
+$subscription->repeats(2)
+             ->interval(1);
+
+$response = $apiGN->createCharge()
+                  ...
+                  ->subscription($subscription)
+                  ->run()
+                  ->response();
+```
+
+To detail a subscription, you can do this:
+```php
+$response = $apiGN->detailSubscription()
+                  ->subscriptionId($subscriptionId)
+                  ->run()
+                  ->response();
+```
+
+To cancel a subscription:
+```php
+$response = $apiGN->cancelSubscription()
+                  ->subscriptionId($subscriptionId)
+                  ->isCustomer(true) // This is optional
+                  ->run()
+                  ->response();
+```
+
+## Geting installments and total bol ##
+
+To get the installments for a card brand, use:
+```php
+$response = $apiGN->getInstallments()
+                  ->brand('mastercard')
+                  ->value(10000)
+                  ->run()
+                  ->response();
+```
+
+Or if you want to get the total bol, use:
+```php
+$response = $apiGN->getTotalBol()
+                  ->value(10000)
+                  ->run()
+                  ->response();
+```
+
+## Running tests ##
+
+To run tests using php unit run the following command:
 ```php
 php phpunit.phar -c tests/config.xml tests
 ```

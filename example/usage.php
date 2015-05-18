@@ -1,17 +1,18 @@
 <?php
 
-require_once __DIR__ . '/sdk/vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use Gerencianet\Gerencianet;
-use Gerencianet\Helpers\AddressGerencianet;
-use Gerencianet\Helpers\CustomerGerencianet;
-use Gerencianet\Helpers\ItemGerencianet;
-use Gerencianet\Helpers\MarketplaceGerencianet;
-use Gerencianet\Helpers\MetadataGerencianet;
-use Gerencianet\Helpers\RepassGerencianet;
-use Gerencianet\Helpers\ShippingGerencianet;
-use Gerencianet\Helpers\SubscriptionGerencianet;
-use Gerencianet\Webservices\ApiBaseGerencianet;
+use Gerencianet\Models\Address;
+use Gerencianet\Models\Customer;
+use Gerencianet\Models\GerencianetException;
+use Gerencianet\Models\Item;
+use Gerencianet\Models\Marketplace;
+use Gerencianet\Models\Metadata;
+use Gerencianet\Models\Repass;
+use Gerencianet\Models\Shipping;
+use Gerencianet\Models\Subscription;
+use Gerencianet\Webservices\ApiBase;
 
 echo 'SDK GN API';
 echo '<pre>';
@@ -22,24 +23,24 @@ $apiSecret = 'your_client_secret';
 try {
   $apiGN = new Gerencianet($apiKey, $apiSecret, true);
 
-  $repass = new RepassGerencianet();
+  $repass = new Repass();
   $repass->payeeCode('payee_code_to_repass')
          ->percentage(700);
 
-  $mkp = new MarketplaceGerencianet();
+  $mkp = new Marketplace();
   $mkp->addRepass($repass);
 
-  $item1 = new ItemGerencianet();
+  $item1 = new Item();
   $item1->name('Item 1')
         ->value(500)
         ->amount(2)
         ->marketplace($mkp);
 
-  $item2 = new ItemGerencianet();
+  $item2 = new Item();
   $item2->name('Item 2')
         ->value(1000);
 
-  $address = new AddressGerencianet();
+  $address = new Address();
   $address->street('Street 3')
           ->number('10')
           ->neighborhood('Bauxita')
@@ -47,7 +48,7 @@ try {
           ->city('Ouro Preto')
           ->state('MG');
 
-  $customer = new CustomerGerencianet();
+  $customer = new Customer();
   $customer->name('Gorbadoc Oldbuck')
            ->email('oldbuck@gerencianet.com.br')
            ->document('04267484171')
@@ -55,29 +56,29 @@ try {
            ->phoneNumber('5044916523')
            ->address($address);
 
-  $metadata = new MetadataGerencianet();
+  $metadata = new Metadata();
   $metadata->customId('MyID')
            ->notificationUrl('http://your_domain/your_notification_url');
 
-  $metadata2 = new MetadataGerencianet();
+  $metadata2 = new Metadata();
   $metadata2->customId('MyID2')
             ->notificationUrl('http://your_domain/your_notification_url');
 
-  $shipping1 = new ShippingGerencianet();
+  $shipping1 = new Shipping();
   $shipping1->payeeCode('payee_code_to_repass')
             ->name('Shipping')
             ->value(1575);
 
-  $shipping2 = new ShippingGerencianet();
+  $shipping2 = new Shipping();
   $shipping2->payeeCode('payee_code_to_repass')
             ->name('Shipping 2')
             ->value(2000);
 
-  $shipping3 = new ShippingGerencianet();
+  $shipping3 = new Shipping();
   $shipping3->name('Shipping 3')
             ->value(2500);
 
-  $subscription = new SubscriptionGerencianet();
+  $subscription = new Subscription();
   $subscription->repeats(2)
                ->interval(1);
 
@@ -222,7 +223,7 @@ try {
   print_r($respCancelSubscription);
 
 } catch(GerencianetException $e) {
-  ApiBaseGerencianet::error($e);
+  Gerencianet::error($e);
 } catch(Exception $ex) {
-  ApiBaseGerencianet::error($ex);
+  Gerencianet::error($ex);
 }

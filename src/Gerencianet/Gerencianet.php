@@ -1,16 +1,17 @@
 <?php
 
 namespace Gerencianet;
-use Gerencianet\Webservices\ApiBaseGerencianet;
-use Gerencianet\Webservices\ApiCancelSubscriptionGerencianet;
-use Gerencianet\Webservices\ApiChargeGerencianet;
-use Gerencianet\Webservices\ApiCustomerGerencianet;
-use Gerencianet\Webservices\ApiDetailChargeGerencianet;
-use Gerencianet\Webservices\ApiDetailSubscriptionGerencianet;
-use Gerencianet\Webservices\ApiNotificationGerencianet;
-use Gerencianet\Webservices\ApiNotificationUrlGerencianet;
-use Gerencianet\Webservices\ApiPaymentGerencianet;
-use Gerencianet\Webservices\ApiPaymentMethodsGerencianet;
+use Gerencianet\Models\GerencianetException;
+use Gerencianet\Webservices\ApiBase;
+use Gerencianet\Webservices\ApiCancelSubscription;
+use Gerencianet\Webservices\ApiCharge;
+use Gerencianet\Webservices\ApiCustomer;
+use Gerencianet\Webservices\ApiDetailCharge;
+use Gerencianet\Webservices\ApiDetailSubscription;
+use Gerencianet\Webservices\ApiNotification;
+use Gerencianet\Webservices\ApiNotificationUrl;
+use Gerencianet\Webservices\ApiPayment;
+use Gerencianet\Webservices\ApiPaymentMethods;
 
 /**
  * Library to use Gerencianet's Api
@@ -70,50 +71,50 @@ class Gerencianet {
   /**
    * Generate a charge
    *
-   * @return ApiChargeGerencianet
+   * @return ApiCharge
    */
   public function createCharge() {
-    $api = new ApiChargeGerencianet($this->_clientId, $this->_clientSecret, $this->_isTest);
+    $api = new ApiCharge($this->_clientId, $this->_clientSecret, $this->_isTest);
     return $api;
   }
 
   /**
    * Add a customer to charge
    *
-   * @return ApiCustomerGerencianet
+   * @return ApiCustomer
    */
   public function createCustomer() {
-    $api = new ApiCustomerGerencianet($this->_clientId, $this->_clientSecret, $this->_isTest);
+    $api = new ApiCustomer($this->_clientId, $this->_clientSecret, $this->_isTest);
     return $api;
   }
 
   /**
    * Generate a transaction using checkout
    *
-   * @return ApiCheckoutGerencianet
+   * @return ApiPayment
    */
   public function createPayment() {
-    $api = new ApiPaymentGerencianet($this->_clientId, $this->_clientSecret, $this->_isTest);
+    $api = new ApiPayment($this->_clientId, $this->_clientSecret, $this->_isTest);
     return $api;
   }
 
   /**
    * Get available installments for credit card brand
    *
-   * @return ApiPaymentMethodsGerencianet
+   * @return ApiPaymentMethods
    */
   public function getInstallments() {
-    $api = new ApiPaymentMethodsGerencianet($this->_clientId, $this->_clientSecret, $this->_isTest);
+    $api = new ApiPaymentMethods($this->_clientId, $this->_clientSecret, $this->_isTest);
     return $api;
   }
 
   /**
    * Get value total to boleto
    *
-   * @return ApiPaymentMethodsGerencianet
+   * @return ApiPaymentMethods
    */
   public function getTotalBol() {
-    $api = new ApiPaymentMethodsGerencianet($this->_clientId, $this->_clientSecret, $this->_isTest);
+    $api = new ApiPaymentMethods($this->_clientId, $this->_clientSecret, $this->_isTest);
 
     $api->isBol(true);
     return $api;
@@ -122,50 +123,68 @@ class Gerencianet {
   /**
    * Get notifications of a token
    *
-   * @return ApiNotificationGerencianet
+   * @return ApiNotification
    */
   public function getNotifications() {
-    $api = new ApiNotificationGerencianet($this->_clientId, $this->_clientSecret, $this->_isTest);
+    $api = new ApiNotification($this->_clientId, $this->_clientSecret, $this->_isTest);
     return $api;
   }
 
   /**
    * Updated charge' notification url
    *
-   * @return ApiNotificationUrlGerencianet
+   * @return ApiNotificationUrl
    */
   public function updateNotificationUrl() {
-    $api = new ApiNotificationUrlGerencianet($this->_clientId, $this->_clientSecret, $this->_isTest);
+    $api = new ApiNotificationUrl($this->_clientId, $this->_clientSecret, $this->_isTest);
     return $api;
   }
 
   /**
    * Cancel the subscription
    *
-   * @return ApiCancelSubscriptionGerencianet
+   * @return ApiCancelSubscription
    */
   public function cancelSubscription() {
-    $api = new ApiCancelSubscriptionGerencianet($this->_clientId, $this->_clientSecret, $this->_isTest);
+    $api = new ApiCancelSubscription($this->_clientId, $this->_clientSecret, $this->_isTest);
     return $api;
   }
 
   /**
    * Detail the subscription
    *
-   * @return ApiDetailSubscriptionGerencianet
+   * @return ApiDetailSubscription
    */
   public function detailSubscription() {
-    $api = new ApiDetailSubscriptionGerencianet($this->_clientId, $this->_clientSecret, $this->_isTest);
+    $api = new ApiDetailSubscription($this->_clientId, $this->_clientSecret, $this->_isTest);
     return $api;
   }
 
   /**
    * Detail the charge
    *
-   * @return ApiDetailChargeGerencianet
+   * @return ApiDetailCharge
    */
   public function detailCharge() {
-    $api = new ApiDetailChargeGerencianet($this->_clientId, $this->_clientSecret, $this->_isTest);
+    $api = new ApiDetailCharge($this->_clientId, $this->_clientSecret, $this->_isTest);
     return $api;
   }
+
+   /**
+   * Error response handler.
+   * This function prints the message of an exception or an string
+   *
+   * @param $e Exception or message to be printed
+   */
+  public static function error($e = '') {
+    http_response_code(500);
+    if($e instanceof GerencianetException) {
+      echo $e->toString();
+    } else if($e instanceof Exception) {
+      echo $e->getMessage();
+    } else {
+      echo $e;
+    }
+  }
+
 }

@@ -1,15 +1,15 @@
 <?php
 
 use Gerencianet\Gerencianet;
-use Gerencianet\Helpers\AddressGerencianet;
-use Gerencianet\Helpers\CustomerGerencianet;
-use Gerencianet\Helpers\ItemGerencianet;
-use Gerencianet\Helpers\MarketplaceGerencianet;
-use Gerencianet\Helpers\MetadataGerencianet;
-use Gerencianet\Helpers\RepassGerencianet;
-use Gerencianet\Helpers\ShippingGerencianet;
-use Gerencianet\Helpers\SubscriptionGerencianet;
-use Gerencianet\Webservices\ApiBaseGerencianet;
+use Gerencianet\Models\Address;
+use Gerencianet\Models\Customer;
+use Gerencianet\Models\Item;
+use Gerencianet\Models\Marketplace;
+use Gerencianet\Models\Metadata;
+use Gerencianet\Models\Repass;
+use Gerencianet\Models\Shipping;
+use Gerencianet\Models\Subscription;
+use Gerencianet\Webservices\ApiBase;
 use GuzzleHttp\Stream\Stream;
 use GuzzleHttp\Message\Response;
 
@@ -22,20 +22,20 @@ class Base extends PHPUnit_Framework_TestCase {
   }
 
   public function createRepass() {
-    $repass = new RepassGerencianet();
+    $repass = new Repass();
 
     return $repass->payeeCode('jsadkbfwfzmndck')
                   ->percentage(700);
   }
 
   public function createMarketplace() {
-    $mkp = new MarketplaceGerencianet();
+    $mkp = new Marketplace();
 
     return $mkp->addRepass(self::createRepass());
   }
 
   public function createItem() {
-    $item = new ItemGerencianet();
+    $item = new Item();
 
     return $item->name('Item 1')
                 ->value(1000)
@@ -44,7 +44,7 @@ class Base extends PHPUnit_Framework_TestCase {
   }
 
   public function createShipping() {
-    $shipping = new ShippingGerencianet();
+    $shipping = new Shipping();
 
     return $shipping->payeeCode('jsadkbfwfzmndck')
                     ->name('Frete')
@@ -52,14 +52,14 @@ class Base extends PHPUnit_Framework_TestCase {
   }
 
   public function createMetadata() {
-    $metadata = new MetadataGerencianet();
+    $metadata = new Metadata();
 
     return $metadata->customId('MYID')
                     ->notificationUrl('http://localhost/teste.php');
   }
 
   public function createSubscription() {
-    $subscription = new SubscriptionGerencianet();
+    $subscription = new Subscription();
 
     return $subscription->repeats(2)
                         ->interval(1);
@@ -78,7 +78,7 @@ class Base extends PHPUnit_Framework_TestCase {
   }
 
   public function createAddress() {
-    $address = new AddressGerencianet();
+    $address = new Address();
 
     return $address->street('Av. JK')
                    ->number('909')
@@ -89,13 +89,13 @@ class Base extends PHPUnit_Framework_TestCase {
   }
 
   public function createCustomer() {
-    $customer = new CustomerGerencianet();
+    $customer = new Customer();
 
-    return $customer->name("Gerencianet Pagamentos do Brasil")
-                    ->email("suporte@gerencianet.com.br")
-                    ->document("26245144000100")
-                    ->birth('1995-05-02')
-                    ->phoneNumber('3136030800')
+    return $customer->name('Gorbadoc Oldbuck')
+                    ->email('oldbuck@gerencianet.com.br')
+                    ->document('04267484171')
+                    ->birth('1977-01-15')
+                    ->phoneNumber('5044916523')
                     ->address(self::createAddress());
   }
 

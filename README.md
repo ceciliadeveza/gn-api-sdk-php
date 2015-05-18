@@ -19,29 +19,42 @@ Require the module and namespaces:
 require __DIR__ . '/../sdk/vendor/autoload.php';
 
 use Gerencianet\Gerencianet;
-use Gerencianet\Webservices\ApiBaseGerencianet;
-use Gerencianet\Helpers\AddressGerencianet;
-use Gerencianet\Helpers\CustomerGerencianet;
-use Gerencianet\Helpers\ItemGerencianet;
-use Gerencianet\Helpers\MarketplaceGerencianet;
-use Gerencianet\Helpers\MetadataGerencianet;
-use Gerencianet\Helpers\RepassGerencianet;
-use Gerencianet\Helpers\ShippingGerencianet;
-use Gerencianet\Helpers\SubscriptionGerencianet;
+use Gerencianet\Models\Address;
+use Gerencianet\Models\Customer;
+use Gerencianet\Models\Item;
+use Gerencianet\Models\Marketplace;
+use Gerencianet\Models\Metadata;
+use Gerencianet\Models\Repass;
+use Gerencianet\Models\Shipping;
+use Gerencianet\Models\Subscription;
+use Gerencianet\Models\GerencianetException;
 ```
 
-All code must be within a try-catch like this:
+If your system already has any class above, you can use PHP' namespaces
+for conflict resolution as below:
+```php
+require __DIR__ . '/../sdk/vendor/autoload.php';
+
+...
+use Gerencianet\Models\Address as GerencianetAddress;
+...
+```
+
+All code must be within a try-catch.
+Gerencianet::error method can be used to print a JSON back to your frontend.
 ```php
 try {
   /* code */
 } catch(GerencianetException $e) {
-  ApiBaseGerencianet::error($e);
+  Gerencianet::error($e);
 } catch(Exception $ex) {
-  ApiBaseGerencianet::error($ex);
+  Gerencianet::error($ex);
 }
 ```
 
-Instantiate the module passing your apiKey, your apiSecret and if you want use sandbox, respectively:
+
+### For development environment ###
+Instantiate the module passing your apiKey, your apiSecret and the third parameter is used to change the environment to sandbox:
 ```php
 $apiKey = 'your_client_id';
 $apiSecret = 'your_client_secret';
@@ -49,11 +62,22 @@ $apiSecret = 'your_client_secret';
 $apiGN = new Gerencianet($apiKey, $apiSecret, true);
 ```
 
+### For production environment ###
+To change the environment to production just change the third parameter to false as
+follow:
+```php
+$apiKey = 'your_client_id';
+$apiSecret = 'your_client_secret';
+
+$apiGN = new Gerencianet($apiKey, $apiSecret, false);
+```
+
+
 ## Creating charge ##
 
 To create a new charge, you must create at least one item:
 ```php
-$item = new ItemGerencianet();
+$item = new Item();
 $item->name('Item Gerencianet')
      ->value(5000) // The value must be a integer (ex.: R$ 50,00 = 5000)
      ->amount(2);
@@ -84,11 +108,11 @@ $response = $apiGN->createCharge()
 
 Charge can also have shipping and metadata:
 ```php
-$shipping = new ShippingGerencianet();
+$shipping = new Shipping();
 $shipping->name('Shipping')
          ->value(2500);
 
-$metadata = new MetadataGerencianet();
+$metadata = new Metadata();
 $metadata->customId('MyID')
          ->notificationUrl('http://your_domain/your_notification_url');
 

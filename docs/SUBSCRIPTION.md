@@ -2,7 +2,7 @@
 
 To create a charge as a subscription, you need add to charge creation the following code:
 ```php
-$subscription = new SubscriptionGerencianet();
+$subscription = new Subscription();
 $subscription->repeats(2)
              ->interval(1);
 

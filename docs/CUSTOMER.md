@@ -4,7 +4,7 @@ You have two options to add a customer:
 
 * Add a customer in the moment to create a charge:
 ```php
-$address = new AddressGerencianet();
+$address = new Address();
 $address->street('Street 3')
         ->number('10')
         ->neighborhood('Bauxita')
@@ -12,7 +12,7 @@ $address->street('Street 3')
         ->city('Ouro Preto')
         ->state('MG');
 
-$customer = new CustomerGerencianet();
+$customer = new Customer();
 $customer->name('Gorbadoc Oldbuck')
          ->email('oldbuck@gerencianet.com.br')
          ->document('04267484171')

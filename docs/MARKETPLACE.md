@@ -3,14 +3,14 @@
 If you want use marketplace, use as follow:
 
 ```php
-$repass = new RepassGerencianet();
+$repass = new Repass();
 $repass->payeeCode('payee_code_to_repass')
        ->percentage(7000);
 
-$mkp = new MarketplaceGerencianet();
+$mkp = new Marketplace();
 $mkp->addRepass($repass);
 
-$item = new ItemGerencianet();
+$item = new Item();
 $item->name('Item')
      ->value(500)
      ->amount(2)

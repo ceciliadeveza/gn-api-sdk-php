@@ -16,9 +16,11 @@ class CustomerTest extends Base {
     $this->assertNotEmpty($customer->getAddress());
 
     $addressCustomer = $customer->getAddress();
-    $this->assertEquals($addressCustomer->getStreet(), 'Av. JK');
-    $this->assertEquals($addressCustomer->getNumber(), '909');
+    $this->assertEquals($addressCustomer->getStreet(), 'Street 3');
+    $this->assertEquals($addressCustomer->getNumber(), '10');
     $this->assertEquals($addressCustomer->getNeighborhood(), 'Bauxita');
     $this->assertEquals($addressCustomer->getZipcode(), '35400000');
+    $this->assertEquals($addressCustomer->getCity(), 'Ouro Preto');
+    $this->assertEquals($addressCustomer->getState(), 'MG');
   }
 }

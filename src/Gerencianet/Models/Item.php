@@ -45,11 +45,11 @@ class Item {
   private $_amount = 1;
 
   /**
-   * Marketplace configurations of item
+   * Set of marketplace repasses of item
    *
-   * @var Marketplace
+   * @var array
    */
-  private $_marketplace;
+  private $_repasses;
 
   /**
    * Set name of item
@@ -112,25 +112,37 @@ class Item {
   }
 
   /**
-   * Set marketplace configurations of item
+   * Add a new repass to the set of repasses
    *
-   * @param  Marketplace $marketplace
+   * @param  Repass $repass
    * @return Item
    */
-  public function marketplace(Marketplace $marketplace) {
-    $this->_marketplace = $marketplace;
+  public function addRepass(Repass $repass) {
+    $this->_repasses[] = $repass->toArray();
     return $this;
   }
 
   /**
-   * Get marketplace configurations of item
+   * Add a array of new repasses to the set of repasses
    *
-   * @return Marketplace
+   * @param  Array $repasses
+   * @return Item
    */
-  public function getMarketplace() {
-    return $this->_marketplace;
+  public function addRepasses($repasses) {
+    foreach($repasses as $repass) {
+      $this->_repasses[] = $repass->toArray();
+    }
+    return $this;
   }
 
+  /**
+   * Get the set of repasses
+   *
+   * @return array
+   */
+  public function getRepasses() {
+    return $this->_repasses;
+  }
   /**
    * Get the item as array
    *
@@ -143,8 +155,10 @@ class Item {
       'amount' => $this->_amount
     ];
 
-    if($this->_marketplace) {
-      $item['marketplace'] = $this->_marketplace->toArray();
+    if($this->_repasses) {
+      $item['marketplace'] = [
+        'repasses' => $this->_repasses
+      ];
     }
 
     return $item;

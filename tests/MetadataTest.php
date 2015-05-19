@@ -8,7 +8,7 @@ class MetadataTest extends Base {
     $metadata = self::createMetadata();
 
     $this->assertNotEmpty($metadata);
-    $this->assertEquals($metadata->getCustomId(), 'MYID');
+    $this->assertEquals($metadata->getCustomId(), 'MyID');
     $this->assertEquals($metadata->getNotificationUrl(), 'http://localhost/teste.php');
   }
 }

@@ -50,7 +50,7 @@ class ApiDetailSubscription extends ApiBase {
    * @return ApiDetailSubscription
    */
   public function subscriptionId($id) {
-    $this->_subscriptionId = $id;
+    $this->_subscriptionId = (int)$id;
     return $this;
   }
 

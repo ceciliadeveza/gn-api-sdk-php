@@ -22,7 +22,6 @@ use Gerencianet\Gerencianet;
 use Gerencianet\Models\Address;
 use Gerencianet\Models\Customer;
 use Gerencianet\Models\Item;
-use Gerencianet\Models\Marketplace;
 use Gerencianet\Models\Metadata;
 use Gerencianet\Models\Repass;
 use Gerencianet\Models\Shipping;

@@ -57,7 +57,7 @@ class ApiCancelSubscription extends ApiBase {
    * @return ApiCancelSubscription
    */
   public function subscriptionId($id) {
-    $this->_subscriptionId = $id;
+    $this->_subscriptionId = (int)$id;
     return $this;
   }
 

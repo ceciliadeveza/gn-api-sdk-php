@@ -11,6 +11,7 @@ class ItemTest extends Base {
     $this->assertEquals($item->getName(), 'Item 1');
     $this->assertEquals($item->getValue(), 1000);
     $this->assertEquals($item->getAmount(), 2);
-    $this->assertNotEmpty($item->getMarketplace());
+    $this->assertNotEmpty($item->getRepasses());
+    $this->assertEquals(count($item->getRepasses()), 1);
   }
 }

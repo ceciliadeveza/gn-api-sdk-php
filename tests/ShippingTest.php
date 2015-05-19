@@ -9,7 +9,7 @@ class ShippingTest extends Base {
 
     $this->assertNotEmpty($shipping);
     $this->assertEquals($shipping->getPayeeCode(), 'jsadkbfwfzmndck');
-    $this->assertEquals($shipping->getName(), 'Frete');
+    $this->assertEquals($shipping->getName(), 'Shipping');
     $this->assertEquals($shipping->getValue(), 1575);
   }
 }

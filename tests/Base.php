@@ -4,7 +4,6 @@ use Gerencianet\Gerencianet;
 use Gerencianet\Models\Address;
 use Gerencianet\Models\Customer;
 use Gerencianet\Models\Item;
-use Gerencianet\Models\Marketplace;
 use Gerencianet\Models\Metadata;
 use Gerencianet\Models\Repass;
 use Gerencianet\Models\Shipping;
@@ -28,33 +27,27 @@ class Base extends PHPUnit_Framework_TestCase {
                   ->percentage(700);
   }
 
-  public function createMarketplace() {
-    $mkp = new Marketplace();
-
-    return $mkp->addRepass(self::createRepass());
-  }
-
   public function createItem() {
     $item = new Item();
 
     return $item->name('Item 1')
                 ->value(1000)
                 ->amount(2)
-                ->marketplace(self::createMarketplace());
+                ->addRepass(self::createRepass());
   }
 
   public function createShipping() {
     $shipping = new Shipping();
 
     return $shipping->payeeCode('jsadkbfwfzmndck')
-                    ->name('Frete')
+                    ->name('Shipping')
                     ->value(1575);
   }
 
   public function createMetadata() {
     $metadata = new Metadata();
 
-    return $metadata->customId('MYID')
+    return $metadata->customId('MyID')
                     ->notificationUrl('http://localhost/teste.php');
   }
 
@@ -80,8 +73,8 @@ class Base extends PHPUnit_Framework_TestCase {
   public function createAddress() {
     $address = new Address();
 
-    return $address->street('Av. JK')
-                   ->number('909')
+    return $address->street('Street 3')
+                   ->number('10')
                    ->neighborhood('Bauxita')
                    ->zipcode('35400000')
                    ->city('Ouro Preto')

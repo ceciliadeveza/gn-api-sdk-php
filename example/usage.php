@@ -7,7 +7,6 @@ use Gerencianet\Models\Address;
 use Gerencianet\Models\Customer;
 use Gerencianet\Models\GerencianetException;
 use Gerencianet\Models\Item;
-use Gerencianet\Models\Marketplace;
 use Gerencianet\Models\Metadata;
 use Gerencianet\Models\Repass;
 use Gerencianet\Models\Shipping;
@@ -27,14 +26,11 @@ try {
   $repass->payeeCode('payee_code_to_repass')
          ->percentage(700);
 
-  $mkp = new Marketplace();
-  $mkp->addRepass($repass);
-
   $item1 = new Item();
   $item1->name('Item 1')
         ->value(500)
         ->amount(2)
-        ->marketplace($mkp);
+        ->addRepass($repass);
 
   $item2 = new Item();
   $item2->name('Item 2')
@@ -166,7 +162,7 @@ try {
 
   echo '</br>Subscription:</br>';
   $respSubscription = $apiGN->createCharge()
-                            ->addItem($item1)
+                            ->addItem($item2)
                             ->addShipping($shipping3)
                             ->subscription($subscription)
                             ->customer($customer)
